@@ -1,0 +1,8 @@
+name: maibi_ba
+channels:
+  - defaults
+dependencies:
+  - r-essentials
+  - r-base
+  - fonts-anaconda
+  - r-cairo

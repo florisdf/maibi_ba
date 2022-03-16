@@ -3,6 +3,6 @@ channels:
   - defaults
 dependencies:
   - r-essentials
-  - r-base
+  - r-base=4.0.5
   - fonts-anaconda
   - r-cairo

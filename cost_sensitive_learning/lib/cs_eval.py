@@ -55,17 +55,13 @@ def evaluate_clf(clf, df_test, thresh=0.5):
 
     tp_amount, fp_amount, fn_amount = get_tp_fp_fn_amount(df_test, y_pred)
 
-    y_true = df_test['Class']
-    y_score = clf.decision_function(X_test)
-
     return {
-        'precision': precision_score(y_true, y_pred),
-        'recall': recall_score(y_true, y_pred),
-        'ap': average_precision_score(y_true, y_score),
-        'pr_curve': precision_recall_curve(y_true, y_score),
+        'cost_precision': tp_amount/(tp_amount + fp_amount),
+        'cost_recall': tp_amount/(tp_amount + fn_amount),
         'tp_amount': tp_amount,
         'fp_amount': fp_amount,
         'fn_amount': fn_amount,
+        'net': tp_amount - fp_amount - fn_amount,
     }
 
 

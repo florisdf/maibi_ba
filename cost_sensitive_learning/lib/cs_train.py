@@ -9,7 +9,7 @@ def train_clf(
     n_pos=-1, n_neg=-1,
     class_weight=None,
     sample_weight=None,
-    max_iter=200,
+    max_iter=500,
     random_state=42
 ):
     """

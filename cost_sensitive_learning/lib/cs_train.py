@@ -10,7 +10,8 @@ def train_clf(
     class_weight=None,
     sample_weight=None,
     max_iter=500,
-    random_state=42
+    random_state=42,
+    Classifier=LogisticRegression,
 ):
     """
     Args:
@@ -51,11 +52,18 @@ def train_clf(
     df_train_sub = pd.concat([df_train.loc[neg_idxs_sub],
                               df_train.loc[pos_idxs_sub]])
 
-    return LogisticRegression(
-        class_weight=class_weight,
-        max_iter=max_iter,
-        random_state=random_state,
-    ).fit(
+    # TODO: improve this
+    if Classifier == LogisticRegression:
+        clf = Classifier(
+            class_weight=class_weight,
+            max_iter=max_iter,
+            random_state=random_state,
+        )
+    else:
+        clf = Classifier(
+            random_state=random_state,
+        )
+    return clf.fit(
         X_train_sub,
         Y_train_sub,
         sample_weight=sample_weight

@@ -4,12 +4,12 @@ from sklearn.preprocessing import RobustScaler
 from sklearn.model_selection import train_test_split
 
 
-def get_X_from_df(df):
-    return df[[*[f'V{i}' for i in range(1, 29)], 'scaled_amount', 'scaled_time']]
-
-
-def get_Y_from_df(df):
-    return df['Class']
+# The feature columns
+X_COLS = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10',
+          'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18', 'V19', 'V20',
+          'V21', 'V22', 'V23', 'V24', 'V25', 'V26', 'V27', 'V28',
+          'Scaled Amount', 'Scaled Time']
+Y_COL = 'Class'
 
 
 def get_df(c_fp=2):
@@ -20,8 +20,8 @@ def get_df(c_fp=2):
     df = pd.read_csv('data/creditcard_fraud_dataset.csv')
     rob_scaler = RobustScaler()
 
-    df['scaled_amount'] = rob_scaler.fit_transform(df['Amount'].values.reshape(-1,1))
-    df['scaled_time'] = rob_scaler.fit_transform(df['Time'].values.reshape(-1,1))
+    df['Scaled Amount'] = rob_scaler.fit_transform(df['Amount'].values.reshape(-1,1))
+    df['Scaled Time'] = rob_scaler.fit_transform(df['Time'].values.reshape(-1,1))
 
     df['C_FP'] = c_fp
     df['C_FN'] = df['Amount']
@@ -43,10 +43,10 @@ def get_train_test_dfs(c_fp=2, test_size=0.5, random_state=42):
         random_state (int): State for the random train-test split.
     """
     df = get_df(c_fp)
-    X = get_X_from_df(df)
-    Y = get_Y_from_df(df)
+    X = df[X_COLS]
+    y = df[Y_COL]
 
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=test_size,
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size,
                                                         random_state=random_state)
 
     df_train = df.loc[X_train.index]

@@ -1,7 +1,7 @@
 
-# Computer Vision - MAIBI
+# Business Analytics - MAIBI
 
-This repository contains the notebooks for the course of Computer Vision, given 
+This repository contains the notebooks for the course of Business Analytics, given 
 at the master AI for Business and Industry.
 
 # Setting up VSC OnDemand
